@@ -1,0 +1,11 @@
+const { faker } = require("@faker-js/faker");
+
+describe("products", () => {
+  it("lists products", () => {
+    cy.visit("http://localhost:5173");
+
+    cy.get("h1").should("have.text", "Products:");
+
+    cy.get('ul[name="products_list"]').should("be.visible");
+  });
+});
