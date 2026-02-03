@@ -1,0 +1,23 @@
+{
+  "name": "bjt-software-development-1800",
+  "version": "1.0.0",
+  "description": "Stretch Goals:\r As a potential buyer of a product, I want to be able to purchase a product.\r As a buyer of a product, I want to be able to view a record of purchases I have made.\r As a seller of a product, I want to be able to view a record of sales of my products.",
+  "homepage": "https://github.com/burtonjoshuatoone/BJT-Software-Development-1800#readme",
+  "bugs": {
+    "url": "https://github.com/burtonjoshuatoone/BJT-Software-Development-1800/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/burtonjoshuatoone/BJT-Software-Development-1800.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx vite --host"
+  },
+  "devDependencies": {
+    "cypress": "^15.9.0"
+  }
+}
