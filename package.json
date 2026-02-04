@@ -18,6 +18,7 @@
     "dev": "npx vite --host"
   },
   "devDependencies": {
-    "cypress": "^15.9.0"
+    "cypress": "^15.9.0",
+    "jest": "^30.2.0"
   }
 }

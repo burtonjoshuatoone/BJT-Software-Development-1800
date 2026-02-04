@@ -5,6 +5,7 @@ form.addEventListener("submit", async (e) => {
   const body = {
     Price: formData.get("price"),
     Inventory_Count: formData.get("inventory_count"),
+    Rating: formData.get("rating"),
   };
   const result = await fetch("http://localhost:5202/products", {
     method: "post",
