@@ -2,7 +2,7 @@ const { faker } = require("@faker-js/faker");
 
 describe("products", () => {
   it("creates products", () => {
-    cy.visit("http://localhost:5173/Create.html");
+    cy.visit("http://localhost:5173/CreateProduct.html");
 
     const price = faker.number
       .float({ min: 0, max: 1000, precision: 0.01 })
@@ -14,7 +14,7 @@ describe("products", () => {
     cy.get('input[name="inventory_count"]').type(inventory_count);
     cy.get('form button[type="submit"]').click();
 
-    cy.url().should("eq", "http://localhost:5173/Create.html");
+    cy.url().should("eq", "http://localhost:5173/CreateProduct.html");
   });
 });
 

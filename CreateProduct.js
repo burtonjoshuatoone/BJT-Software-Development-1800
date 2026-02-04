@@ -15,6 +15,5 @@ form.addEventListener("submit", async (e) => {
     body: JSON.stringify(body),
   });
   const resultBody = await result.text();
-  console.log(resultBody);
-  window.location.replace("Index.html");
+  window.location.replace("http://localhost:5173/Index.html");
 });

@@ -8,7 +8,18 @@
 
     <ul name="products_list"></ul>
 
-    <button><a href="Create.html" target="blank">Create Product</a></button>
+    <button><a href="CreateProduct.html" target="blank">Create Product</a></button>
+    <button><a href="CreateAccount.html" target="blank">Create Account</a></button>
+
+    <div id="statusMessage"></div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("status") === "created") {
+            document.getElementById("statusMessage").textContent =
+                "Account created successfully!";
+        }
+    </script>
 </body>
 
 </html>
