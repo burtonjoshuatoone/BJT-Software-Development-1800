@@ -4,6 +4,7 @@ describe("products", () => {
   it("creates products", () => {
     cy.visit("http://localhost:5173/CreateProduct.html");
 
+    const name = faker.commerce.productName();
     const price = faker.number
       .float({ min: 0, max: 1000, precision: 0.01 })
       .toFixed(2);
@@ -15,6 +16,14 @@ describe("products", () => {
     cy.get('form button[type="submit"]').click();
 
     cy.url().should("eq", "http://localhost:5173/CreateProduct.html");
+
+    cy.visit("http://localhost:5173/Index.html");
+
+    cy.get('ul[name="products_list"] li')
+      .last()
+      .should("contain.text", name)
+      .and("contain.text", price)
+      .and("contain.text", inventory_count);
   });
 });
 
