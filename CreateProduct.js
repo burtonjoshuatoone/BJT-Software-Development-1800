@@ -1,3 +1,6 @@
+if (localStorage.getItem("loggedIn") !== "true") {
+  window.location.replace("Login.html");
+}
 const form = document.querySelector("form");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();

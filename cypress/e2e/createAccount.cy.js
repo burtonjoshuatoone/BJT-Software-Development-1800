@@ -12,6 +12,10 @@ describe("accounts", () => {
     cy.get('input[name="passWord"]').type(passWord);
     cy.get('form button[type="submit"]').click();
 
+    cy.get("#errorMessage")
+      .should("be.visible")
+      .and("contain", "Username already exists");
+
     cy.url().should("eq", "http://localhost:5173/Index.html");
   });
 });

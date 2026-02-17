@@ -8,3 +8,28 @@ for (let i = 0; i < productsJson.length; i++) {
   newLi.innerText = `Price: ${price}, Inventory Count: ${inventory_count}, Rating: ${rating}`;
   products_list.appendChild(newLi);
 }
+// Get logged in user info from LocalStorage
+const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+// If no user is logged in, redirect to login page
+if (!loggedInUser) {
+  alert("No user is logged in");
+  setTimeout(() => {
+    window.location.href = "login.html";
+  }, 1000);
+} else {
+  // Display username on home page
+  document.getElementById("username").textContent = loggedInUser.username;
+}
+
+// Add event listener to logout button
+document.getElementById("logoutButton").addEventListener("click", function () {
+  // Remove logged in user info from LocalStorage
+  localStorage.removeItem("loggedInUser");
+  alert("Logged out successfully, thank you!");
+
+  // Redirect to login page after 1 second
+  setTimeout(() => {
+    window.location.href = "login.html";
+  }, 1000);
+});
