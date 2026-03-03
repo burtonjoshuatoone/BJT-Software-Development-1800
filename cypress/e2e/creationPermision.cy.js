@@ -8,11 +8,11 @@ describe("authorization", () => {
 
     const name = "Test Product";
     const price = "19";
-    const inventory_count = "11";
+    const inventory = "11";
 
     cy.get('input[name="name"]').type(name);
     cy.get('input[name="price"]').type(price);
-    cy.get('input[name="inventory_count"]').type(inventory_count);
+    cy.get('input[name="inventory"]').type(inventory);
     cy.get('form button[type="submit"]').click();
 
     cy.url().should("include", "CreateProduct.html");
