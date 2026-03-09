@@ -11,12 +11,18 @@ for (let i = 0; i < productsJson.length; i++) {
   card.classList.add("product-card");
 
   card.innerHTML = `
-    <h3>${name}</h3>
-    <p>Price: $${price}</p>
-    <p>Inventory: ${inventory}</p>
-    <p>Rating: ${rating}</p>
-    <button class="purchase-btn" data-id="${product.id}"><a href="purchase.html">Purchase</a></button>
-  `;
+  <h3>${name}</h3>
+  <p>Price: $${price}</p>
+  <p>Inventory: ${inventory}</p>
+  <p>Rating: ${rating}</p>
+
+  <button class="purchase-btn" data-id="${product.id}">
+    <a href="purchase.html">Purchase</a>
+  </button>
+
+  <a href="Edit.html?id=${product.id}" class="edit-btn">Edit</a>
+  <a href="Delete.html?id=${product.id}" class="delete-btn">Delete</a>
+`;
 
   products_list.appendChild(card);
 }
@@ -32,29 +38,14 @@ if (!loggedInUser) {
   }, 1000);
 } else {
   // Display username on home page
-  document.getElementById("username").textContent = loggedInUser.username;
+  document.getElementById("username").textContent = loggedInUser.userName;
 }
 
-// Add event listener to logout button
 document.getElementById("logoutButton").addEventListener("click", function () {
-  // Remove logged in user info from LocalStorage
   localStorage.removeItem("loggedInUser");
   alert("Logged out successfully, thank you!");
 
-  // Redirect to login page after 1 second
   setTimeout(() => {
     window.location.href = "login.html";
   }, 1000);
-
-  document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("purchase-btn")) {
-      const id = e.target.dataset.id;
-
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push(id);
-      localStorage.setItem("cart", JSON.stringify(cart));
-
-      alert("Added to cart!");
-    }
-  });
 });

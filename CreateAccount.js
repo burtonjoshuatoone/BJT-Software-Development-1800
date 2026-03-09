@@ -23,7 +23,7 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-    window.location.replace("Index.html");
+    window.location.replace("Login.html");
   } catch (err) {
     document.getElementById("errorMessage").textContent =
       "Server error. Please try again";

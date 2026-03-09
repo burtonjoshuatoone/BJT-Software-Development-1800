@@ -1,6 +1,7 @@
 const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
 if (!loggedInUser) {
+  alert("Error, not logged in");
   window.location.href = "Login.html";
 }
 
@@ -11,8 +12,9 @@ class DatabaseObjectClass {
 }
 
 class Product extends DatabaseObjectClass {
-  constructor(name, price, inventory) {
+  constructor(id, name, price, inventory) {
     super();
+    this.id = id;
     this.name = name;
     this.price = price;
     this.inventory = inventory;
@@ -34,6 +36,7 @@ class Purchase {
   toString() {
     return `Purchasing ${this.quantity} of ${this.product.name} and we're sending it to ${this.address}!`;
   }
+
   static create(params) {
     return new Purchase(params);
   }
@@ -92,14 +95,17 @@ class ApiProductDao extends ProductDao {
     const response = await fetch("http://localhost:5202/products");
     const productsData = await response.json();
 
-    return productsData.map((p) => new Product(p.name, p.price, p.inventory));
+    return productsData.map(
+      (p) => new Product(p.id, p.name, p.price, p.inventory),
+    );
   }
 
   async update(product) {
-    await fetch(`http://localhost:5202/products/${product.name}`, {
+    await fetch(`http://localhost:5202/products/${product.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        id: product.id,
         name: product.name,
         price: product.price,
         inventory: product.inventory,
@@ -146,8 +152,8 @@ class SessionStorageProductDao extends ProductDao {
       ? JSON.parse(productsAsJSON)
       : ProductDao.seeds;
     return productsData.map((productData) => {
-      const { name, price, inventory } = productData;
-      return new Product(name, price, inventory);
+      const { id, name, price, inventory } = productData;
+      return new Product(id, name, price, inventory);
     });
   }
 
@@ -178,7 +184,12 @@ class CookieStorageProductDao extends ProductDao {
       : ProductDao.seeds;
     return productsData.map(
       (productData) =>
-        new Product(productData.name, productData.price, productData.inventory),
+        new Product(
+          productData.id,
+          productData.name,
+          productData.price,
+          productData.inventory,
+        ),
     );
   }
 
@@ -328,10 +339,6 @@ createProductForm.addEventListener("submit", async (event) => {
 
   const successDiv = document.getElementById("purchase-success");
   successDiv.textContent = `Successfully purchased ${quantity} of ${productName}!`;
-
-  const newLi = document.createElement("li");
-  newLi.textContent = `Purchasing ${quantity} of ${productName} and we're sending it to ${address}!`;
-  purchaseList.appendChild(newLi);
 
   productNameSelect.innerHTML = "";
   await loadProducts();
